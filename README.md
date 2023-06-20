@@ -12,10 +12,13 @@ Para realizar a prática com a utilização do Kyverno, deve-se atender os segui
 
 ## **Sumário**
 
-### [1. Pré-requisitos](pre-requisitos.md)
-### [2. Instalação do Kyverno](instalacao-kyverno.md)
-### [3. Pod Security Standard Policies](pod-security.md)
-### [4. Instalação - Kyverno CLI](instalacao-kyverno-cli.md)
-### [5. Validação Básica](validacao-basica.md)
-### [6. Política para validar tag latest](policy-tag-latest.md)
-### [7. Validar política tag latest via CLI](policy-tag-latest-cli.md)
+1. [Pré-requisitos](doc-pages/pre-requisitos.md)
+2. [Instalação do Kyverno](doc-pages/instalacao-kyverno.md)
+3. [Pod Security Standard Policies](doc-pages/pod-security-standard-policies.md)  
+4. [Instalação - Kyverno CLI](doc-pages/instalacao-kyverno-cli.md)  
+5. Políticas de Validação (validate)  
+5.1. [Validação Básica](doc-pages/validacao-basica.md)  
+5.2. [Política para validar tag latest](doc-pages/policy-tag-latest.md)  
+5.3. [Validar política tag latest via CLI](doc-pages/policy-tag-latest-cli.md)  
+6. Políticas de Mudanças (mutate)  
+6.1. [Adição de label em Namespaces existentes](doc-pages/add-label-namespaces.md)

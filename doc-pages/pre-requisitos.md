@@ -51,4 +51,4 @@ export KUBECONFIG=$(pwd)/kubeconfig.yaml
 ```
 O comando acima deve ser executado dentro do diretório que está o arquivo kubeconfig.yaml.
 
-[Principal](README.md) - [Seguir](instalacao-kyverno.md)
+[Principal](../README.md) - [Seguir](instalacao-kyverno.md)

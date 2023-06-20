@@ -1,8 +1,8 @@
-## 6. **Validação para bloquear tag latest**
+## 5.2. **Validação para bloquear tag latest**
 
 Referência no [link](https://kyverno.io/policies/best-practices/disallow_latest_tag/disallow_latest_tag/).
 
-### 6.1. Arquivo de policy
+### 5.2.1. **Arquivo de policy**
 
 Crie o arquivo disallow_latest_tag.yaml:
 ```yaml
@@ -51,15 +51,21 @@ spec:
           - image: "!*:latest"
 ```
 
-### 6.2. **Aplicar a policy**
+### 5.2.2. **Aplicar a policy**
 
 ```shell
 kubectl apply -f disallow_latest_tag.yaml
 ```
 
-### 6.3. **Teste**
+Para listar as cluster policies, execute:
 
-Podemos tester de duas formas:
+```shell
+kubectl get cpol
+```
+
+### 5.2.3. **Teste**
+
+Podemos testar de duas formas:
 - Implantando via arquivo de manifesto um pod ou deployment
 - Implantando via run ou create do kubectl
 
@@ -67,13 +73,17 @@ Teste via run:
 ```shell
 kubectl run nginx --image nginx
 ```
+
 ou
+
 ```shell
 kubectl run nginx --image nginx:latest
 ```
+
 O que aconteceu?
 
-Teste via arquivo de manifesto:
+
+Se preferir, ao invés de executar o teste via kubectl run, o teste pode ser feito também via arquivo de manifesto:
 nginx-teste.yaml
 ```yaml
 apiVersion: apps/v1
@@ -108,4 +118,4 @@ O que aconteceu?
 
 O que precisaria ser feito para que ao invés de bloquear a implantação do deployment com a tag latest, apenas fosse avisada ou auditada a violação da política?
 
-[Principal](README.md) - [Anterior](validacao-basica.md) - [Seguir](policy-tag-latest-cli.md)
+[Principal](../README.md) - [Anterior](validacao-basica.md) - [Seguir](policy-tag-latest-cli.md)

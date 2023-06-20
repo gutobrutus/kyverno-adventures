@@ -16,5 +16,5 @@ tar -xvf kyverno-cli_v1.7.2_linux_x86_64.tar.gz
 mv kyverno /usr/local/bin/
 ```
 
-[Principal](README.md) - [Anterior](pod-security.md) - [Seguir](validacao-basica.md)
+[Principal](../README.md) - [Anterior](pod-security-standard-policies.md) - [Seguir](validacao-basica.md)
 

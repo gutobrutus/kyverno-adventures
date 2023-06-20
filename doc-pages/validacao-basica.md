@@ -1,10 +1,10 @@
-## 5. **Validação básica em criação de namespace**
+## 5.1. **Validação básica em criação de namespace**
 
-Para ilustrar, um exemplo simples, que está na documentação [oficial](https://kyverno.io/docs/writing-policies/validate/).
+Para ilustrar, um exemplo simples, que está na documentação [oficial](https://kyverno.io/docs/writing-policies/validate/). Foi realizada uma pequena adaptação no exemplo, ao invés de ter uma label com um valor pré-determinado, apenas deve ter a label.
 
-### 5.1. **Criar o arquivo da policy**
+### 5.1.1. **Criar o arquivo da policy**
 
-Crie um arquivo namespace-label-prod.yaml:
+Crie um arquivo namespace-label-purpose.yaml:
 ```yaml
 apiVersion: kyverno.io/v1
 # The `ClusterPolicy` kind applies to the entire cluster.
@@ -32,18 +32,34 @@ spec:
       pattern:
         metadata:
           labels:
-            purpose: production
+            purpose: "?*"
 ```
 
-### 5.2. **Aplicar a policy**
+Com a cluster policy acima, sempre que for criado um namespace no cluster, este deve ter uma label "purpose".
+
+### 5.1.2. **Aplicar a policy**
 
 ```shell
-kubectl apply -f namespace-label-prod.yaml
+kubectl apply -f namespace-label-purpose.yaml
 ```
 
-### 5.3. **Teste**
+Para listar e confirmar a criação da cluster policy, pode-se exeutar:
 
-Para testar a política aplicada no cluster, crie um arquivo de manifesto namespace-app1-com-label.yaml:
+```shell
+kubectl get cpol
+```
+
+Na saída do comando acima, deverá existir na lista de policies a policy criada, dentre outras:
+
+```shell
+NAME                             BACKGROUND   VALIDATE ACTION   READY   AGE     MESSAGE
+require-ns-purpose-label         true         Enforce           True    6s      Ready
+```
+Mais informações sobre o campo BACKGROUND [aqui](https://kyverno.io/docs/writing-policies/policy-settings/) e [aqui](https://kyverno.io/docs/policy-reports/background/).
+
+### 5.1.3. **Teste**
+
+Para testar a política aplicada no cluster, crie um arquivo de manifesto namespace-label.yaml:
 
 ```yaml
 apiVersion: v1
@@ -51,17 +67,17 @@ kind: Namespace
 metadata:
   name: prod-bus-app1
   labels:
-    purpose: production
+    purpose: prod
 ```
 
 Agora aplique o manifesto criado:
 
 ```shell
-kubectl apply -f namespace-app1-com-label.yaml
+kubectl apply -f namespace-label.yaml
 ```
 O namespace prod-bus-app1 foi criado, pois passou na validação
 
-Agora crie um outro arquivo de manifesto namespace-app2-sem-label.yaml:
+Agora crie um outro arquivo de manifesto namespace.yaml:
 
 ```yaml
 apiVersion: v1
@@ -72,11 +88,11 @@ metadata:
 
 Aplique o arquivo anterior:
 ```shell
-kubectl apply -f namespace-app2-sem-label.yaml
+kubectl apply -f namespace.yaml
 ```
 
 O que aconteceu?
 
 ***O que precisaria ser feito para que ao invés de bloquear a criação do namespace, apenas fosse avisada ou auditada a violação da política?***
 
-[Principal](README.md) - [Anterior](instalacao-kyverno-cli.md) - [Seguir](policy-tag-latest.md)
+[Principal](../README.md) - [Anterior](instalacao-kyverno-cli.md) - [Seguir](policy-tag-latest.md)
